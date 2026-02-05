@@ -136,7 +136,19 @@ Tigatto Rd., Buhangin, Davao City</p>
 <button class="clear" onclick="clearChecklist()">Clear All Checkboxes</button>
 
 </div>
+<hr style="margin-top:30px;">
 
+<div id="userInfo" style="
+    font-size: 12px;
+    color: #777;
+    line-height: 1.5;
+">
+    <strong>User Information</strong><br>
+    • Total Visits: <span id="visitCount">0</span><br>
+    • Last Visit: <span id="lastVisit">N/A</span><br>
+    • Storage: Local device only (offline capable)<br>
+    • Note: Data will be cleared if browser storage is deleted
+</div>
 <script>
 const STORAGE_KEY = "NSA_CHECKLIST";
 
@@ -167,7 +179,28 @@ document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
 });
 
 window.onload = loadChecklist;
+
+<script>
+const VISIT_KEY = "NSA_VISIT_COUNT";
+const LAST_VISIT_KEY = "NSA_LAST_VISIT";
+
+function trackVisits() {
+    let visits = parseInt(localStorage.getItem(VISIT_KEY)) || 0;
+    visits++;
+    localStorage.setItem(VISIT_KEY, visits);
+
+    const now = new Date().toLocaleString();
+    localStorage.setItem(LAST_VISIT_KEY, now);
+
+    document.getElementById("visitCount").textContent = visits;
+    document.getElementById("lastVisit").textContent = now;
+}
+
+trackVisits();
+</script>
+    
 </script>
 
 </body>
+
 </html>
