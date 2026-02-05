@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NSA Exam Notice – Checklist</title>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f4f6f8;
+        padding: 20px;
+    }
+    .container {
+        max-width: 900px;
+        margin: auto;
+        background: #fff;
+        padding: 25px 35px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+        text-align: center;
+        color: #b30000;
+    }
+    h2 {
+        color: #003366;
+        margin-top: 25px;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 5px;
+    }
+    ul {
+        list-style: none;
+        padding-left: 0;
+    }
+    li {
+        margin-bottom: 10px;
+    }
+    label {
+        cursor: pointer;
+    }
+    input[type="checkbox"] {
+        margin-right: 10px;
+        transform: scale(1.2);
+    }
+    .highlight {
+        background: #fff3cd;
+        padding: 10px;
+        border-left: 5px solid #ff9800;
+        margin: 15px 0;
+    }
+    .warning {
+        background: #fdecea;
+        padding: 10px;
+        border-left: 5px solid #d32f2f;
+        margin: 15px 0;
+    }
+    button {
+        padding: 10px 15px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .clear {
+        background: #b71c1c;
+        color: #fff;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>UPDATED & FINAL NSA WRITTEN EXAMINATION</h1>
+
+<div class="highlight">
+    <strong>Status:</strong> PRIORITY NSA EXAMINEE  
+    <br>This information is CONFIDENTIAL.
+</div>
+
+<h2>📍 Examination Venue</h2>
+<p><strong>DMMA College of Southern Philippines (DCSP – NSA Area)</strong><br>
+Tigatto Rd., Buhangin, Davao City</p>
+
+<h2>📅 Date & Time</h2>
+<ul>
+    <li>📆 February 07, 2026 (Saturday)</li>
+    <li>⏰ Arrival Time: <strong>07:30 AM (Strict)</strong></li>
+    <li>🕓 Ends at 4:00 PM</li>
+</ul>
+
+<div class="warning">
+    <strong>Latecomers will NOT be accommodated.</strong>
+</div>
+
+<h2>🎒 Materials to Bring</h2>
+<ul>
+    <li><label><input type="checkbox" data-key="id">Valid ID</label></li>
+    <li><label><input type="checkbox" data-key="pencil">#2 Pencil</label></li>
+    <li><label><input type="checkbox" data-key="eraser">Eraser</label></li>
+    <li><label><input type="checkbox" data-key="sharpener">Sharpener</label></li>
+    <li><label><input type="checkbox" data-key="ruler">Ruler</label></li>
+    <li><label><input type="checkbox" data-key="lunch">Lunch</label></li>
+    <li><label><input type="checkbox" data-key="water">Water</label></li>
+</ul>
+
+<h2>➕ Optional Items</h2>
+<ul>
+    <li><label><input type="checkbox" data-key="snacks">Snacks</label></li>
+    <li><label><input type="checkbox" data-key="towel">Face Towel</label></li>
+    <li><label><input type="checkbox" data-key="fan">Hand Fan</label></li>
+</ul>
+
+<h2>📚 Exam Coverage (Study Checklist)</h2>
+<ul>
+    <li><label><input type="checkbox" data-key="abstract">Abstract Reasoning</label></li>
+    <li><label><input type="checkbox" data-key="english">English</label></li>
+    <li><label><input type="checkbox" data-key="science">Science</label></li>
+    <li><label><input type="checkbox" data-key="math">Mathematics</label></li>
+</ul>
+
+<h2>🚫 Prohibited Items (Self-Check)</h2>
+<ul>
+    <li><label><input type="checkbox" data-key="sleeveless">No sleeveless / sando</label></li>
+    <li><label><input type="checkbox" data-key="slippers">No slippers</label></li>
+    <li><label><input type="checkbox" data-key="gadgets">No smart watches / earphones</label></li>
+</ul>
+
+<h2>📌 Policy Acknowledgement</h2>
+<ul>
+    <li><label><input type="checkbox" data-key="no-repeat">I understand repeat test-taking is NOT allowed</label></li>
+    <li><label><input type="checkbox" data-key="no-share">I will NOT share this information</label></li>
+</ul>
+
+<button class="clear" onclick="clearChecklist()">Clear All Checkboxes</button>
+
+</div>
+
+<script>
+const STORAGE_KEY = "NSA_CHECKLIST";
+
+function loadChecklist() {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        cb.checked = saved[cb.dataset.key] || false;
+    });
+}
+
+function saveChecklist() {
+    const data = {};
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        data[cb.dataset.key] = cb.checked;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+function clearChecklist() {
+    if (confirm("Clear all checked items?")) {
+        localStorage.removeItem(STORAGE_KEY);
+        document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+    }
+}
+
+document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', saveChecklist);
+});
+
+window.onload = loadChecklist;
+</script>
+
+</body>
+</html>
